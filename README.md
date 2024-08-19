@@ -49,6 +49,7 @@ End-to-end testing is not conducted on these modules, as they are individual com
 | [azurerm_monitor_data_collection_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
 | [azurerm_monitor_data_collection_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_endpoint) | resource |
 | [azurerm_monitor_data_collection_rule_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule_association) | resource |
+| [azurerm_monitor_data_collection_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_data_collection_rule) | data resource |
 
 ## Inputs
 
@@ -91,21 +92,21 @@ Full examples detailing all usages, along with integrations with dependency modu
 
 ## Authors
 
-Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/terraform-azure-sa/graphs/contributors).
+Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/terraform-azure-dcr/graphs/contributors).
 
 ## Contributing
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](https://github.com/CloudNationHQ/terraform-azure-sa/blob/main/CONTRIBUTING.md).
+For more information, please see our contribution [guidelines](https://github.com/CloudNationHQ/terraform-azure-dcr/blob/main/CONTRIBUTING.md).
 
 ## License
 
-MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/terraform-azure-sa/blob/main/LICENSE) for full details.
+MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/terraform-azure-dcr/blob/main/LICENSE) for full details.
 
 ## References
 
-- [Documentation](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
-= [Documentation](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-endpoint-overview)
+- [Documentation Collection Rules](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
+- [Documentation Collection Endpoints](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/monitor/data-collection-rules)
 - [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/monitor/resource-manager/Microsoft.Insights)
