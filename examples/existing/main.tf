@@ -142,10 +142,8 @@ module "vm2" {
 }
 
 module "dcr" {
-  # source  = "cloudnationhq/dcr/azure"
-  # version = "~> 0.1"
-
-  source = "../../"
+  source  = "cloudnationhq/dcr/azure"
+  version = "~> 1.0"
 
   naming = local.naming
 

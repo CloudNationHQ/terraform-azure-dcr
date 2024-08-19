@@ -29,10 +29,8 @@ module "law" {
 }
 
 module "dcr" {
-  # source  = "cloudnationhq/dcr/azure"
-  # version = "~> 0.1"
-
-  source = "../../"
+  source  = "cloudnationhq/dcr/azure"
+  version = "~> 1.0"
 
   rule = {
     name           = module.naming.data_collection_rule.name
