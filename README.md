@@ -106,7 +106,8 @@ MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/terraform-azure-dcr
 
 ## References
 
-- [Documentation Collection Rules](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
-- [Documentation Collection Endpoints](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
+- [Documentation]
+    - [Collection Rules](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
+    - [Collection Endpoints](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/monitor/data-collection-rules)
 - [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/monitor/resource-manager/Microsoft.Insights)
