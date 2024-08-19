@@ -106,7 +106,7 @@ MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/terraform-azure-dcr
 
 ## References
 
-- [Documentation](https://github.com/CloudNationHQ/terraform-azure-dcr/tree/feat/add_initial_resources?tab=readme-ov-file#references)
+- [Documentation](https://github.com/CloudNationHQ/terraform-azure-dcr#references)
     - [Collection Rules](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
     - [Collection Endpoints](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/monitor/data-collection-rules)
