@@ -3,40 +3,40 @@ This example highlights the complete data collection rule setup, with a log anal
 ## Usage
 
 ```hcl
-naming = string  # Reference to the naming convention used
+naming = string
 
 rule = object({
-  name           = string                # Name of the data collection rule
-  location       = string                # Location where the resource is deployed
-  resource_group = string                # Resource group containing the data collection rule
+  name           = string
+  location       = string
+  resource_group = string
 
-  data_flow = map(object({               # Map of data flows for the rule
-    streams      = list(string)          # List of data streams (e.g., "Microsoft-InsightsMetrics")
-    destinations = list(string)          # List of destination references as defined under the destinations block (e.g., "la1")
+  data_flow = map(object({
+    streams      = list(string)
+    destinations = list(string)
   }))
 
-  destinations = object({                # Object defining the destinations for the data collection rule
+  destinations = object({
     log_analytics = optional(map(object({
-      workspace_resource_id = string     # Resource ID of the Log Analytics workspace
+      workspace_resource_id = string
     })))
   })
 
-  associations = optional(map(object({   # Map of associations for the data collection rule
-    name               = string          # Name of the association
-    target_resource_id = string          # Resource ID of the target resource (e.g., VM)
-    description        = optional(string) # Optional description of the association
+  associations = optional(map(object({
+    name               = string
+    target_resource_id = string
+    description        = optional(string)
   })))
 })
 
-endpoints = optional(map(object({                 # Map of endpoints for the deployment
-  resource_group                = string  # Resource group containing the endpoint
-  location                      = string  # Location where the endpoint is deployed
-  public_network_access_enabled = bool    # Flag indicating if public network access is enabled
-  description                   = string  # Description of the endpoint
+endpoints = optional(map(object({
+  resource_group                = string
+  location                      = string
+  public_network_access_enabled = bool
+  description                   = string
 
-  associations = optional(map(object({             # Map of associations for the endpoint
-    target_resource_id = string           # Resource ID of the target resource (e.g., VM)
-    description        = optional(string) # Optional description of the association
+  associations = optional(map(object({
+    target_resource_id = string
+    description        = optional(string)
   })))
 })))
 ```
