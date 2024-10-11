@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.0.0...v2.1.0) (2024-10-11)
+
+
+### Features
+
+* auto generated docs and refine makefile ([#9](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/9)) ([14f8417](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/14f84173ec6ac42b11ae83f0f2bc63a11c39997c))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#8](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/8)) ([8d86ab7](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/8d86ab773d488da39a6146375dbb345da267abc5))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v1.0.1...v2.0.0) (2024-09-25)
 
 
