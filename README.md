@@ -29,46 +29,49 @@ End-to-end testing is not conducted on these modules, as they are individual com
 - provides associating target resources with a data collection rule.
 - utilization of terratest for robust validation.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.115 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.115 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
 
 ## Resources
 
 | Name | Type |
-| :-- | :-- |
-| [azurerm_monitor_data_collection_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
-| [azurerm_monitor_data_collection_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_endpoint) | resource |
-| [azurerm_monitor_data_collection_rule_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule_association) | resource |
-| [azurerm_monitor_data_collection_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_data_collection_rule) | data source |
+|------|------|
+| [azurerm_monitor_data_collection_endpoint.dce](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_endpoint) | resource |
+| [azurerm_monitor_data_collection_rule.dcr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
+| [azurerm_monitor_data_collection_rule_association.dca](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule_association) | resource |
+| [azurerm_monitor_data_collection_rule.existing](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_data_collection_rule) | data source |
 
 ## Inputs
 
-| Name | Description | Type | Required |
-| :-- | :-- | :-- | :-- |
-| `rule` | describes data collection rule related configuration | object | yes |
-| `endpoints` | describes data collection endpoints related configuration | object | yes |
-| `naming` | contains naming convention	| string | yes |
-| `location` | default azure region to be used | string | no |
-| `resource_group` | default resource group to be used | string | no |
-| `tags` | default tags to be added to the resources | map(string) | no |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_endpoints"></a> [endpoints](#input\_endpoints) | describes data collection endpoints related configuration | `any` | `{}` | no |
+| <a name="input_location"></a> [location](#input\_location) | default azure region to be used. | `string` | `null` | no |
+| <a name="input_naming"></a> [naming](#input\_naming) | contains naming convention | `map(string)` | `{}` | no |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | default resource group to be used. | `string` | `null` | no |
+| <a name="input_rule"></a> [rule](#input\_rule) | describes data collection rule related configuration | `any` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | default tags to be added to the resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
-| :-- | :-- |
-| `rule` | contains the data collection rule configuration details |
-| `endpoints` | contains the data collection endpoints configuration details  |
-| `associations` | contains the id of the association rule |
+|------|-------------|
+| <a name="output_associations"></a> [associations](#output\_associations) | data collection association configuration specifics |
+| <a name="output_endpoints"></a> [endpoints](#output\_endpoints) | data collection endpoints configuration specifics |
+| <a name="output_rule"></a> [rule](#output\_rule) | data collection rule configuration specifics |
+<!-- END_TF_DOCS -->
 
 ## Testing
 
