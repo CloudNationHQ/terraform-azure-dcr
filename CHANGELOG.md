@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.1.0...v2.2.0) (2024-11-11)
+
+
+### Features
+
+* enhance testing with sequential, parallel modes and flags for exceptions and skip-destroy ([#11](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/11)) ([73f2345](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/73f234500dbebbeb52228cebd92711baa39b5e1b))
+
 ## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.0.0...v2.1.0) (2024-10-11)
 
 
