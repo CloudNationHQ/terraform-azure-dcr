@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.2.0...v2.3.0) (2025-01-20)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#14](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/14)) ([e92aa81](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/e92aa81624bb9510440f2eb71232464186a2f5eb))
+* **deps:** bump golang.org/x/crypto from 0.29.0 to 0.31.0 in /tests ([#17](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/17)) ([31275a1](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/31275a12ac953c1069daf28984ce56b99b6eb904))
+* **deps:** bump golang.org/x/net from 0.31.0 to 0.33.0 in /tests ([#18](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/18)) ([9d08305](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/9d083058068627704568ac3f8da22f743bac4555))
+* remove temporary files when deployment tests fails ([#15](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/15)) ([7003cf6](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/7003cf6f972693cbfe0dd2b0919968d6a3990e26))
+
 ## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.1.0...v2.2.0) (2024-11-11)
 
 
