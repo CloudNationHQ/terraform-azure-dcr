@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.0...v2.3.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* single data_sources block  ([#23](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/23)) ([6ddb29e](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/6ddb29e89a0314fce959914110eaedbf053ad33e))
+
 ## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.2.0...v2.3.0) (2025-01-20)
 
 
