@@ -104,12 +104,10 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   dynamic "data_sources" {
-    for_each = {
-      for key, ds in try(var.rule.data_sources, {}) : key => ds
-    }
+    for_each = length(try(var.rule.data_sources, {})) > 0 ? [1] : []
     content {
       dynamic "data_import" {
-        for_each = try(data_sources.value.data_import, null) != null ? { default = data_sources.value.data_import } : {}
+        for_each = try(var.rule.data_sources.data_import, null) != null ? { default = var.rule.data_sources.data_import } : {}
         content {
           event_hub_data_source {
             name           = data_import.value.event_hub_data_source.name
@@ -120,7 +118,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "syslog" {
-        for_each = { for key, sl in try(data_sources.value.syslog, {}) : key => sl }
+        for_each = { for key, sl in try(var.rule.data_sources.syslog, {}) : key => sl }
         content {
           facility_names = syslog.value.facility_names
           log_levels     = syslog.value.log_levels
@@ -130,7 +128,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "iis_log" {
-        for_each = { for key, il in try(data_sources.value.iis_log, {}) : key => il }
+        for_each = { for key, il in try(var.rule.data_sources.iis_log, {}) : key => il }
         content {
           streams         = iis_log.value.streams
           name            = try(iis_log.value.name, iis_log.key)
@@ -139,7 +137,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "log_file" {
-        for_each = { for key, lf in try(data_sources.value.log_file, {}) : key => lf }
+        for_each = { for key, lf in try(var.rule.data_sources.log_file, {}) : key => lf }
         content {
           streams       = log_file.value.streams
           name          = try(log_file.value.name, log_file.key)
@@ -157,7 +155,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "performance_counter" {
-        for_each = { for key, pc in try(data_sources.value.performance_counter, {}) : key => pc }
+        for_each = { for key, pc in try(var.rule.data_sources.performance_counter, {}) : key => pc }
         content {
           streams                       = performance_counter.value.streams
           sampling_frequency_in_seconds = performance_counter.value.sampling_frequency_in_seconds
@@ -175,7 +173,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "prometheus_forwarder" {
-        for_each = { for key, pf in try(data_sources.value.prometheus_forwarder, {}) : key => pf }
+        for_each = { for key, pf in try(var.rule.data_sources.prometheus_forwarder, {}) : key => pf }
         content {
           streams = prometheus_forwarder.value.streams
           name    = try(prometheus_forwarder.value.name, prometheus_forwarder.key)
@@ -191,7 +189,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "windows_event_log" {
-        for_each = { for key, wel in try(data_sources.value.windows_event_log, {}) : key => wel }
+        for_each = { for key, wel in try(var.rule.data_sources.windows_event_log, {}) : key => wel }
         content {
           streams        = windows_event_log.value.streams
           x_path_queries = windows_event_log.value.x_path_queries
@@ -200,7 +198,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "windows_firewall_log" {
-        for_each = { for key, wfl in try(data_sources.value.windows_firewall_log, {}) : key => wfl }
+        for_each = { for key, wfl in try(var.rule.data_sources.windows_firewall_log, {}) : key => wfl }
         content {
           streams = windows_firewall_log.value.streams
           name    = try(windows_firewall_log.value.name, windows_firewall_log.key)
@@ -208,7 +206,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
       }
 
       dynamic "extension" {
-        for_each = { for key, ex in try(data_sources.value.extension, {}) : key => ex }
+        for_each = { for key, ex in try(var.rule.data_sources.extension, {}) : key => ex }
         content {
           streams            = extension.value.streams
           input_data_sources = extension.value.input_data_sources
