@@ -29,9 +29,8 @@ module "law" {
 }
 
 module "dcr" {
-  # source  = "cloudnationhq/dcr/azure"
-  # version = "~> 2.0"
-  source = "../../"
+  source  = "cloudnationhq/dcr/azure"
+  version = "~> 2.0"
 
   naming = local.naming
 
