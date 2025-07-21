@@ -49,7 +49,7 @@ module "dcr" {
     data_sources = {
       iis_log = {
         iis_log1 = {
-          streams = ["Microsoft-W3CIISLog"]
+          streams         = ["Microsoft-W3CIISLog"]
           log_directories = ["C:\\inetpub\\logs\\LogFiles\\W3SVC1"]
         }
       }
