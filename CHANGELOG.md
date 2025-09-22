@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.2](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.1...v2.3.2) (2025-09-22)
+
+
+### Bug Fixes
+
+* default value for jsonencoded setting ([#27](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/27)) ([db19d0b](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/db19d0bf3484344d90c533becb7263c9f0748282))
+
 ## [2.3.1](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.0...v2.3.1) (2025-07-21)
 
 
