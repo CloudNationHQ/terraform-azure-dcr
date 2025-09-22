@@ -211,7 +211,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
           streams            = extension.value.streams
           input_data_sources = extension.value.input_data_sources
           extension_name     = extension.value.extension_name
-          extension_json     = length(try(each.value.extension_json, {})) > 0 ? jsonencode(each.value.extension_json) : null
+          extension_json     = try(extension.value.extension_json, null) != null ? jsonencode(extension.value.extension_json) : null
           name               = try(extension.value.name, extension.key)
         }
       }
