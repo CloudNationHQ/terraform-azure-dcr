@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.3](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.2...v2.3.3) (2025-09-22)
+
+
+### Bug Fixes
+
+* change logic for nontyped module ([#29](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/29)) ([4ce13a1](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/4ce13a162ff9af5e4b25ed28f7deabcd0512fad3))
+
 ## [2.3.2](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.1...v2.3.2) (2025-09-22)
 
 
