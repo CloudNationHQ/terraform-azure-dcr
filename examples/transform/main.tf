@@ -2,7 +2,7 @@ module "naming" {
   source  = "cloudnationhq/naming/azure"
   version = "~> 0.25"
 
-  suffix = ["dcr", "dev"]
+  suffix = ["demo", "dev"]
 }
 
 module "rg" {
@@ -32,15 +32,19 @@ module "dcr" {
   source  = "cloudnationhq/dcr/azure"
   version = "~> 3.0"
 
+  naming = local.naming
+
   rule = {
     name                = module.naming.data_collection_rule.name
     location            = module.rg.groups.demo.location
     resource_group_name = module.rg.groups.demo.name
+    kind                = "WorkspaceTransforms"
 
     data_flow = {
       df1 = {
-        streams      = ["Microsoft-InsightsMetrics"]
-        destinations = ["la1"]
+        streams       = ["Microsoft-Table-LAQueryLogs"]
+        destinations  = ["la1"]
+        transform_kql = "source | where QueryText !contains 'LAQueryLogs' | extend Context = parse_json(RequestContext) | extend Resources_CF = tostring(Context['workspaces'])"
       }
     }
 
