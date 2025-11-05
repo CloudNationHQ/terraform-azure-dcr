@@ -290,7 +290,6 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
           input_data_sources = extension.value.input_data_sources
           extension_name     = extension.value.extension_name
           extension_json     = try(extension.value.extension_json, null) != null ? jsonencode(extension.value.extension_json) : null
-          name               = try(extension.value.name, extension.key)
         }
       }
     }
