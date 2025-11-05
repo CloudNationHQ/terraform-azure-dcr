@@ -11,6 +11,11 @@
 
 * add type definitions and small refactor ([#31](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/31)) ([669d23b](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/669d23b1bea529034ca1bbf9d4730a8844b40188))
 
+### Upgrade from v2.3.3 to v3.0.0:
+
+- Update module reference to: `version = "~> 3.0"`
+- The property and variable resource_group is renamed to resource_group_name
+
 ## [2.3.3](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.2...v2.3.3) (2025-09-22)
 
 
