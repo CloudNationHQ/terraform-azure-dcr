@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.3...v3.0.0) (2025-11-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change expects to change the existing data structure
+
+### Features
+
+* add type definitions and small refactor ([#31](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/31)) ([669d23b](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/669d23b1bea529034ca1bbf9d4730a8844b40188))
+
 ## [2.3.3](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v2.3.2...v2.3.3) (2025-09-22)
 
 
