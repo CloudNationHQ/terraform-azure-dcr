@@ -112,7 +112,7 @@ variable "rule" {
         streams            = list(string)
         input_data_sources = list(string)
         extension_name     = string
-        extension_json     = any
+        extension_json     = optional(any)
         name               = optional(string)
       })), {})
     }), null)
