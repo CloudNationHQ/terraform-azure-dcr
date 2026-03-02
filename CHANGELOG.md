@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v3.1.0...v3.2.0) (2026-03-02)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#40](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/40)) ([b8edd60](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/b8edd6020b5cc30d8c3d8887193fe108dabb3dbc))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#42](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/42)) ([da88c6d](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/da88c6d65342e99bc2049d159bd534fe19b0a6a6))
+
 ## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v3.0.0...v3.1.0) (2025-12-23)
 
 
