@@ -7,7 +7,7 @@ module "naming" {
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "law" {
   source  = "cloudnationhq/law/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   workspace = {
     name                = module.naming.log_analytics_workspace.name
@@ -30,7 +30,7 @@ module "law" {
 
 module "network-weu" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 9.0"
+  version = "~> 10.0"
 
   naming = local.naming
 
@@ -51,7 +51,7 @@ module "network-weu" {
 
 module "network-uks" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 9.0"
+  version = "~> 10.0"
 
   naming = local.naming
 
@@ -74,7 +74,7 @@ module "network-uks" {
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 4.0"
+  version = "~> 6.0"
 
   naming = local.naming
 
@@ -87,7 +87,7 @@ module "kv" {
 
 module "vm" {
   source  = "cloudnationhq/vm/azure"
-  version = "~> 6.0"
+  version = "~> 8.0"
 
   keyvault   = module.kv.vault.id
   naming     = local.naming
@@ -124,7 +124,7 @@ module "vm" {
 
 module "vm2" {
   source  = "cloudnationhq/vm/azure"
-  version = "~> 6.0"
+  version = "~> 8.0"
 
   keyvault   = module.kv.vault.id
   naming     = local.naming
@@ -161,7 +161,7 @@ module "vm2" {
 
 module "dcr" {
   source  = "cloudnationhq/dcr/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   naming = local.naming
 

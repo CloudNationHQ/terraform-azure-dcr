@@ -7,7 +7,7 @@ module "naming" {
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "law" {
   source  = "cloudnationhq/law/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   workspace = {
     name                = module.naming.log_analytics_workspace.name
@@ -30,7 +30,7 @@ module "law" {
 
 module "dcr_windows" {
   source  = "cloudnationhq/dcr/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   rule = {
     name                = module.naming.data_collection_rule.name

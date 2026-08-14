@@ -112,7 +112,7 @@ variable "rule" {
         streams            = list(string)
         input_data_sources = list(string)
         extension_name     = string
-        extension_json     = optional(any)
+        extension_json     = optional(string)
         name               = optional(string)
       })), {})
     }), null)
@@ -152,7 +152,7 @@ variable "endpoints" {
     resource_group_name           = optional(string)
     location                      = optional(string)
     kind                          = optional(string)
-    public_network_access_enabled = optional(bool, true)
+    public_network_access_enabled = optional(bool)
     description                   = optional(string)
     tags                          = optional(map(string))
     associations = optional(map(object({
@@ -162,12 +162,6 @@ variable "endpoints" {
     })), {})
   }))
   default = {}
-}
-
-variable "naming" {
-  description = "contains naming convention"
-  type        = map(string)
-  default     = {}
 }
 
 variable "location" {
