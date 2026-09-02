@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v3.1.0...v4.0.0) (2026-09-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change causes recreates
+
+### Features
+
+* azurerm provider 5 upgrade ([#47](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/47)) ([e2d8569](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/e2d8569af76dc036c9a1f0b4f47d533f22d32f8c))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#40](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/40)) ([b8edd60](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/b8edd6020b5cc30d8c3d8887193fe108dabb3dbc))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#42](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/42)) ([da88c6d](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/da88c6d65342e99bc2049d159bd534fe19b0a6a6))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#43](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/43)) ([5f69ce5](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/5f69ce50861443a56527812f97803c3926900db7))
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#44](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/44)) ([3bca8f9](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/3bca8f950d2f259940ab2969d374706b028276a1))
+* **deps:** bump golang.org/x/crypto from 0.45.0 to 0.52.0 in /tests ([#45](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/45)) ([523b4dd](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/523b4dd0cd2b6f6942bc38711e41b4d513ed6919))
+
 ## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v3.0.0...v3.1.0) (2025-12-23)
 
 
