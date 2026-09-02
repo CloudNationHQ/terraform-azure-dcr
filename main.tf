@@ -1,38 +1,37 @@
 # data source for existing rule
-data "azurerm_monitor_data_collection_rule" "existing" {
-  for_each = var.rule.use_existing_rule == true ? { default = var.rule } : {}
+data "azurerm_monitor_data_collection_rule" "this" {
+  for_each = var.rule.use_existing_rule == true ? { "this" = var.rule } : {}
 
   resource_group_name = coalesce(
-    lookup(var.rule, "resource_group_name", null),
-    var.resource_group_name
+    each.value.resource_group_name, var.resource_group_name
   )
 
   name = each.value.name
 }
 
 # data collection rule
-resource "azurerm_monitor_data_collection_rule" "dcr" {
-  for_each = var.rule.use_existing_rule == false ? { default = var.rule } : {}
+resource "azurerm_monitor_data_collection_rule" "this" {
+  for_each = var.rule.use_existing_rule == false ? { "this" = var.rule } : {}
 
   resource_group_name = coalesce(
-    lookup(
-      var.rule, "resource_group_name", null
-    ), var.resource_group_name
+    each.value.resource_group_name, var.resource_group_name
   )
 
   location = coalesce(
-    lookup(var.rule, "location", null
-    ), var.location
+    each.value.location, var.location
   )
 
-  name                        = var.rule.name
-  description                 = var.rule.description
-  data_collection_endpoint_id = try(var.endpoints, {}) != {} ? try(azurerm_monitor_data_collection_endpoint.dce["default"].id, null) : null
-  kind                        = var.rule.kind
+  name        = each.value.name
+  description = each.value.description
+  kind        = each.value.kind
+
+  data_collection_endpoint_id = each.value.data_collection_endpoint_key != null ? (
+    azurerm_monitor_data_collection_endpoint.this[each.value.data_collection_endpoint_key].id
+  ) : each.value.data_collection_endpoint_id
 
   destinations {
     dynamic "azure_monitor_metrics" {
-      for_each = var.rule.destinations.azure_monitor_metrics != null ? { default = var.rule.destinations.azure_monitor_metrics } : {}
+      for_each = each.value.destinations.azure_monitor_metrics != null ? { "this" = each.value.destinations.azure_monitor_metrics } : {}
 
       content {
         name = azure_monitor_metrics.value.name
@@ -40,7 +39,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "log_analytics" {
-      for_each = var.rule.destinations.log_analytics
+      for_each = each.value.destinations.log_analytics
 
       content {
         name = coalesce(
@@ -52,7 +51,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "monitor_account" {
-      for_each = var.rule.destinations.monitor_account
+      for_each = each.value.destinations.monitor_account
 
       content {
         name = coalesce(
@@ -64,7 +63,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "event_hub" {
-      for_each = var.rule.destinations.event_hub
+      for_each = each.value.destinations.event_hub
 
       content {
         name = coalesce(
@@ -76,7 +75,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "event_hub_direct" {
-      for_each = var.rule.destinations.event_hub_direct
+      for_each = each.value.destinations.event_hub_direct
 
       content {
         name = coalesce(
@@ -88,7 +87,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "storage_blob" {
-      for_each = var.rule.destinations.storage_blob
+      for_each = each.value.destinations.storage_blob
 
       content {
         name = coalesce(
@@ -101,7 +100,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "storage_blob_direct" {
-      for_each = var.rule.destinations.storage_blob_direct
+      for_each = each.value.destinations.storage_blob_direct
 
       content {
         name = coalesce(
@@ -114,7 +113,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
     }
 
     dynamic "storage_table_direct" {
-      for_each = var.rule.destinations.storage_table_direct
+      for_each = each.value.destinations.storage_table_direct
 
       content {
         name = coalesce(
@@ -128,7 +127,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   dynamic "data_flow" {
-    for_each = var.rule.data_flow
+    for_each = each.value.data_flow
 
     content {
       streams            = data_flow.value.streams
@@ -140,11 +139,11 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   dynamic "data_sources" {
-    for_each = var.rule.data_sources != null ? { default = var.rule.data_sources } : {}
+    for_each = each.value.data_sources != null ? { "this" = each.value.data_sources } : {}
 
     content {
       dynamic "data_import" {
-        for_each = data_sources.value.data_import != null ? { default = data_sources.value.data_import } : {}
+        for_each = data_sources.value.data_import != null ? { "this" = data_sources.value.data_import } : {}
 
         content {
           event_hub_data_source {
@@ -246,7 +245,10 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
             for_each = prometheus_forwarder.value.label_include_filter
 
             content {
-              label = label_include_filter.value.name
+              label = coalesce(
+                label_include_filter.value.name, label_include_filter.key
+              )
+
               value = label_include_filter.value.value
             }
           }
@@ -296,7 +298,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   dynamic "stream_declaration" {
-    for_each = var.rule.stream_declaration != null ? { default = var.rule.stream_declaration } : {}
+    for_each = each.value.stream_declaration != null ? { "this" = each.value.stream_declaration } : {}
 
     content {
       stream_name = stream_declaration.value.stream_name
@@ -313,7 +315,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   dynamic "identity" {
-    for_each = var.rule.identity != null ? { default = var.rule.identity } : {}
+    for_each = each.value.identity != null ? { "this" = each.value.identity } : {}
 
     content {
       type         = identity.value.type
@@ -322,28 +324,25 @@ resource "azurerm_monitor_data_collection_rule" "dcr" {
   }
 
   tags = coalesce(
-    var.rule.tags, var.tags
+    each.value.tags, var.tags
   )
 }
 
 # data collection endpoints
-resource "azurerm_monitor_data_collection_endpoint" "dce" {
+resource "azurerm_monitor_data_collection_endpoint" "this" {
   for_each = var.endpoints
 
   name = coalesce(
-    each.value.name,
-    try(join("-", [var.naming.data_collection_endpoint, each.key]), null),
-    each.key
+    each.value.name, each.key
   )
 
   resource_group_name = coalesce(
-    lookup(each.value, "resource_group_name", null),
+    each.value.resource_group_name,
     var.resource_group_name
   )
 
   location = coalesce(
-    lookup(each.value, "location", null
-    ), var.location
+    each.value.location, var.location
   )
 
   kind                          = each.value.kind
@@ -351,34 +350,33 @@ resource "azurerm_monitor_data_collection_endpoint" "dce" {
   description                   = each.value.description
 
   tags = coalesce(
-    var.rule.tags, var.tags
+    each.value.tags, var.tags
   )
 }
 
 # data collection rule associations
-resource "azurerm_monitor_data_collection_rule_association" "dca" {
+resource "azurerm_monitor_data_collection_rule_association" "this" {
   for_each = merge(
     {
       for key, ra in var.rule.associations : key => {
-        name               = ra.name
-        target_resource_id = ra.target_resource_id
-        description        = ra.description
-        data_collection_rule_id = var.rule.use_existing_rule == false ? (
-          azurerm_monitor_data_collection_rule.dcr["default"].id
-          ) : (
-          data.azurerm_monitor_data_collection_rule.existing["default"].id
-        )
+        target_resource_id          = ra.target_resource_id
+        description                 = ra.description
+        data_collection_rule_id     = var.rule.use_existing_rule == false ? (azurerm_monitor_data_collection_rule.this["this"].id) : (data.azurerm_monitor_data_collection_rule.this["this"].id)
         data_collection_endpoint_id = null
+        name = coalesce(
+          ra.name, key
+        )
       }
     },
     merge([
       for key_ep, ep in var.endpoints : {
-        for key_ea, ea in ep.associations : key_ea => {
+        for key_ea, ea in ep.associations :
+        "${key_ep}.${key_ea}" => {
           name                        = ea.name
           target_resource_id          = ea.target_resource_id
           description                 = ea.description
           data_collection_rule_id     = null
-          data_collection_endpoint_id = azurerm_monitor_data_collection_endpoint.dce[key_ep].id
+          data_collection_endpoint_id = azurerm_monitor_data_collection_endpoint.this[key_ep].id
         }
       }
     ]...)

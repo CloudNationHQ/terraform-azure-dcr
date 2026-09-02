@@ -1,14 +1,14 @@
 output "endpoints" {
   description = "data collection endpoints configuration specifics"
-  value       = azurerm_monitor_data_collection_endpoint.dce
+  value       = azurerm_monitor_data_collection_endpoint.this
 }
 
 output "rule" {
   description = "data collection rule configuration specifics"
-  value       = azurerm_monitor_data_collection_rule.dcr
+  value       = azurerm_monitor_data_collection_rule.this
 }
 
 output "associations" {
   description = "data collection association configuration specifics"
-  value       = azurerm_monitor_data_collection_rule_association.dca
+  value       = azurerm_monitor_data_collection_rule_association.this
 }

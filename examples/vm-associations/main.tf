@@ -1,13 +1,13 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.25"
+  version = "~> 0.32"
 
   suffix = ["demo", "dev"]
 }
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "law" {
   source  = "cloudnationhq/law/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   workspace = {
     name                = module.naming.log_analytics_workspace.name
@@ -30,9 +30,8 @@ module "law" {
 
 module "network" {
   source  = "cloudnationhq/vnet/azure"
-  version = "~> 9.0"
+  version = "~> 10.0"
 
-  naming = local.naming
 
   vnet = {
     name                = module.naming.virtual_network.name
@@ -51,33 +50,47 @@ module "network" {
 
 module "kv" {
   source  = "cloudnationhq/kv/azure"
-  version = "~> 4.0"
+  version = "~> 6.0"
 
-  naming = local.naming
 
   vault = {
     name                = module.naming.key_vault.name_unique
     location            = module.rg.groups.demo.location
     resource_group_name = module.rg.groups.demo.name
+
+    secrets = {
+      tls_keys = {
+        vm1 = {
+          algorithm = "RSA"
+          rsa_bits  = 2048
+        }
+      }
+
+      random_string = {
+        vm2 = {
+          length  = 24
+          special = false
+        }
+      }
+    }
   }
 }
 
 module "vm" {
   source  = "cloudnationhq/vm/azure"
-  version = "~> 6.0"
+  version = "~> 8.0"
 
-  keyvault   = module.kv.vault.id
-  naming     = local.naming
-  depends_on = [module.kv]
-
-  instance = {
+  virtual_machine = {
     type                = "linux"
     name                = module.naming.linux_virtual_machine.name
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
+    size                = "Standard_D2s_v3"
+    username            = "adminuser"
+    public_key          = module.kv.tls_public_keys.vm1.value
 
-    generate_ssh_key = {
-      enable = true
+    os_disk = {
+      storage_account_type = "Standard_LRS"
     }
 
     source_image_reference = {
@@ -101,20 +114,19 @@ module "vm" {
 
 module "vm2" {
   source  = "cloudnationhq/vm/azure"
-  version = "~> 6.0"
+  version = "~> 8.0"
 
-  keyvault   = module.kv.vault.id
-  naming     = local.naming
-  depends_on = [module.kv]
-
-  instance = {
+  virtual_machine = {
     type                = "windows"
     name                = "${module.naming.windows_virtual_machine.name}2"
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
+    size                = "Standard_D2s_v3"
+    username            = "adminuser"
+    password            = module.kv.secrets.vm2.value
 
-    generate_password = {
-      enable = true
+    os_disk = {
+      storage_account_type = "Standard_LRS"
     }
 
     source_image_reference = {
@@ -138,14 +150,14 @@ module "vm2" {
 
 module "dcr" {
   source  = "cloudnationhq/dcr/azure"
-  version = "~> 3.0"
-
-  naming = local.naming
+  version = "~> 4.0"
 
   rule = {
     name                = module.naming.data_collection_rule.name
     location            = module.rg.groups.demo.location
     resource_group_name = module.rg.groups.demo.name
+
+    data_collection_endpoint_key = "default"
 
     data_flow = {
       df1 = {
@@ -165,13 +177,13 @@ module "dcr" {
     associations = {
       vm = {
         name               = "association-dcr-vm"
-        target_resource_id = module.vm.instance.id
+        target_resource_id = module.vm.virtual_machine.id
         description        = "association dcr - vm"
       }
 
       vm2 = {
         name               = "association-dcr-vm2"
-        target_resource_id = module.vm2.instance.id
+        target_resource_id = module.vm2.virtual_machine.id
         description        = "association dcr - vm2"
       }
     }
@@ -186,7 +198,7 @@ module "dcr" {
 
       associations = {
         vm = {
-          target_resource_id = module.vm.instance.id
+          target_resource_id = module.vm.virtual_machine.id
           description        = "association dce - vm"
         }
       }
@@ -200,7 +212,7 @@ module "dcr" {
 
       associations = {
         vm2 = {
-          target_resource_id = module.vm2.instance.id
+          target_resource_id = module.vm2.virtual_machine.id
           description        = "association dce - vm2"
         }
       }
