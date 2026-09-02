@@ -166,12 +166,6 @@ variable "endpoints" {
   default = {}
 }
 
-variable "naming" {
-  description = "contains naming convention"
-  type        = map(string)
-  default     = {}
-}
-
 variable "location" {
   description = "default azure region to be used"
   type        = string
