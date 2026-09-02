@@ -23,22 +23,22 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_monitor_data_collection_endpoint.dce](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_endpoint) (resource)
-- [azurerm_monitor_data_collection_rule.dcr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) (resource)
-- [azurerm_monitor_data_collection_rule_association.dca](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule_association) (resource)
-- [azurerm_monitor_data_collection_rule.existing](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_data_collection_rule) (data source)
+- [azurerm_monitor_data_collection_endpoint.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_endpoint) (resource)
+- [azurerm_monitor_data_collection_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) (resource)
+- [azurerm_monitor_data_collection_rule_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule_association) (resource)
+- [azurerm_monitor_data_collection_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_data_collection_rule) (data source)
 
 ## Required Inputs
 
@@ -52,13 +52,15 @@ Type:
 
 ```hcl
 object({
-    name                = string
-    resource_group_name = optional(string)
-    location            = optional(string)
-    description         = optional(string)
-    kind                = optional(string)
-    tags                = optional(map(string))
-    use_existing_rule   = optional(bool, false)
+    name                         = string
+    resource_group_name          = optional(string)
+    location                     = optional(string)
+    description                  = optional(string)
+    kind                         = optional(string)
+    tags                         = optional(map(string))
+    use_existing_rule            = optional(bool, false)
+    data_collection_endpoint_id  = optional(string)
+    data_collection_endpoint_key = optional(string)
     destinations = object({
       azure_monitor_metrics = optional(object({
         name = string
@@ -146,7 +148,7 @@ object({
         streams = list(string)
         name    = optional(string)
         label_include_filter = optional(map(object({
-          name  = string
+          name  = optional(string)
           value = string
         })), {})
       })), {})
@@ -179,7 +181,7 @@ object({
       identity_ids = optional(list(string), [])
     }), null)
     associations = optional(map(object({
-      name               = string
+      name               = optional(string)
       target_resource_id = string
       description        = optional(string)
     })), {})
@@ -202,7 +204,7 @@ map(object({
     resource_group_name           = optional(string)
     location                      = optional(string)
     kind                          = optional(string)
-    public_network_access_enabled = optional(bool, true)
+    public_network_access_enabled = optional(bool)
     description                   = optional(string)
     tags                          = optional(map(string))
     associations = optional(map(object({
@@ -222,14 +224,6 @@ Description: default azure region to be used
 Type: `string`
 
 Default: `null`
-
-### <a name="input_naming"></a> [naming](#input\_naming)
-
-Description: contains naming convention
-
-Type: `map(string)`
-
-Default: `{}`
 
 ### <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name)
 
@@ -284,11 +278,7 @@ To update the module's documentation run `make doc`
 
 We welcome contributions from the community! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your input is highly valued.
 
-For more information, please see our contribution [guidelines](./CONTRIBUTING.md). <br><br>
-
-<a href="https://github.com/cloudnationhq/terraform-azure-dcr/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=cloudnationhq/terraform-azure-dcr" />
-</a>
+For more information, please see our contribution [guidelines](./CONTRIBUTING.md).
 
 ## Authors
 
@@ -303,5 +293,3 @@ MIT Licensed. See [LICENSE](./LICENSE) for full details.
 - [Documentation](https://github.com/CloudNationHQ/terraform-azure-dcr#references)
     - [Collection Rules](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
     - [Collection Endpoints](https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/data-collection-rule-overview)
-- [Rest Api](https://learn.microsoft.com/en-us/rest/api/monitor/data-collection-rules)
-- [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/monitor/resource-manager/Microsoft.Insights)

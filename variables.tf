@@ -1,13 +1,15 @@
 variable "rule" {
   description = "contains all data collection rule configuration"
   type = object({
-    name                = string
-    resource_group_name = optional(string)
-    location            = optional(string)
-    description         = optional(string)
-    kind                = optional(string)
-    tags                = optional(map(string))
-    use_existing_rule   = optional(bool, false)
+    name                         = string
+    resource_group_name          = optional(string)
+    location                     = optional(string)
+    description                  = optional(string)
+    kind                         = optional(string)
+    tags                         = optional(map(string))
+    use_existing_rule            = optional(bool, false)
+    data_collection_endpoint_id  = optional(string)
+    data_collection_endpoint_key = optional(string)
     destinations = object({
       azure_monitor_metrics = optional(object({
         name = string
@@ -95,7 +97,7 @@ variable "rule" {
         streams = list(string)
         name    = optional(string)
         label_include_filter = optional(map(object({
-          name  = string
+          name  = optional(string)
           value = string
         })), {})
       })), {})
@@ -128,7 +130,7 @@ variable "rule" {
       identity_ids = optional(list(string), [])
     }), null)
     associations = optional(map(object({
-      name               = string
+      name               = optional(string)
       target_resource_id = string
       description        = optional(string)
     })), {})
@@ -152,7 +154,7 @@ variable "endpoints" {
     resource_group_name           = optional(string)
     location                      = optional(string)
     kind                          = optional(string)
-    public_network_access_enabled = optional(bool, true)
+    public_network_access_enabled = optional(bool)
     description                   = optional(string)
     tags                          = optional(map(string))
     associations = optional(map(object({
@@ -162,12 +164,6 @@ variable "endpoints" {
     })), {})
   }))
   default = {}
-}
-
-variable "naming" {
-  description = "contains naming convention"
-  type        = map(string)
-  default     = {}
 }
 
 variable "location" {
