@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v4.0.0...v4.1.0) (2026-10-20)
+
+
+### Features
+
+* **deps:** bump github.com/klauspost/compress in /tests ([#48](https://github.com/CloudNationHQ/terraform-azure-dcr/issues/48)) ([c4eb445](https://github.com/CloudNationHQ/terraform-azure-dcr/commit/c4eb445c0cea24d220d630f6950da81272e29d9a))
+
 ## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-dcr/compare/v3.1.0...v4.0.0) (2026-09-02)
 
 
